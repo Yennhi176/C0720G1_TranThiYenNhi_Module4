@@ -7,15 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title>chuyển đổi tiền tệ</title>
-  </head>
-  <body>
-  <h1>chuyển đổi tiền tệ</h1>
-  <form action="/change">
-  <input type="text" name="USD" placeholder="USD">
+</head>
+<body>
+<h1>chuyển đổi tiền tệ</h1>
+<form action="/change">
+    <input type="text" name="USD" placeholder="USD">
     <input type="text" value="23000">
-  <input type="submit" value="change">
-  </form>
-  </body>
+    <input type="submit" value="change">
+</form>
+</body>
 </html>
