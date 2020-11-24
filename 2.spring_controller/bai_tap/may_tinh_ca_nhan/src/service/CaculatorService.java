@@ -1,8 +1,6 @@
 package service;
 
 public interface CaculatorService {
-    double sum(double num1 , double num2);
-    double sub(double num1 , double num2);
-    double mul(double num1 , double num2);
-    double div(double num1 , double num2);
+
+    double caculator(double number1, double number2, String caculation);
 }
