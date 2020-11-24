@@ -15,12 +15,12 @@ public class CaculatorController {
     @Autowired
     private CaculatorService caculatorService;
 
-    @GetMapping({"/" , "/caculator"})
+    @GetMapping({"/", "/caculator"})
     public String caculator(@RequestParam double number1, @RequestParam double number2, Model model, @RequestParam String caculation) {
-       double result = 0;
+        double result = 0;
         switch (caculation) {
             case "Addition(+)":
-               result = caculatorService.sum(number1, number2);
+                result = caculatorService.sum(number1, number2);
                 break;
             case "Subtraction(-)":
                 result = caculatorService.sub(number1, number2);
@@ -29,7 +29,13 @@ public class CaculatorController {
                 result = caculatorService.mul(number1, number2);
                 break;
             case "Division(/)":
-              result = caculatorService.div(number1, number2);
+                String message = "vui lòng nhập lại number2 khác không";
+                if (number2 != 0) {
+                    result = caculatorService.div(number1, number2);
+                } else {
+                    model.addAttribute("message", message);
+                    return "result";
+                }
                 break;
             default:
                 break;
