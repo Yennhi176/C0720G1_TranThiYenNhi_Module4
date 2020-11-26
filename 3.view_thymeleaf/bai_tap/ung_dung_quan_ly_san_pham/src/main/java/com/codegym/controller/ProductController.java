@@ -3,6 +3,8 @@ package com.codegym.controller;
 import com.codegym.model.Product;
 import com.codegym.service.ProductService;
 import com.codegym.service.impl.ProductServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +17,8 @@ import java.util.List;
 
 @Controller
 public class ProductController {
-
-    private ProductService productService = new ProductServiceImpl();
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -33,7 +35,6 @@ public class ProductController {
 
     @PostMapping("/product/save")
     public String save(@ModelAttribute Product product, RedirectAttributes redirect) {
-        product.setId((int) (Math.random() * 1000));
         productService.save(product);
         redirect.addFlashAttribute("success", "Saved customer successfully!");
         return "redirect:/";
@@ -44,26 +45,30 @@ public class ProductController {
         model.addAttribute("product", productService.findById(id));
         return "/edit";
     }
+
     @PostMapping("/product/update")
-    public String update(@ModelAttribute Product product,RedirectAttributes redirect){
-        productService.update(product.getId(),product);
-        redirect.addFlashAttribute("success","Modified customer successfully!");
+    public String update(@ModelAttribute Product product, RedirectAttributes redirect) {
+        productService.update(product.getId(), product);
+        redirect.addFlashAttribute("success", "Modified customer successfully!");
         return "redirect:/";
     }
+
     @GetMapping("/product/{id}/delete")
-    public String delete(@PathVariable int id,Model model){
-        model.addAttribute("product",productService.findById(id));
+    public String delete(@PathVariable int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
         return "/delete";
     }
+
     @PostMapping("/product/delete")
-    public String delete(@ModelAttribute Product product,RedirectAttributes redirect){
+    public String delete(@ModelAttribute Product product, RedirectAttributes redirect) {
         productService.remove(product.getId());
-        redirect.addFlashAttribute("success","Removed customer successfully!");
+        redirect.addFlashAttribute("success", "Removed customer successfully!");
         return "redirect:/";
     }
+
     @GetMapping("/product/{id}/view")
-    public String view(@PathVariable int id,Model model){
-        model.addAttribute("product",productService.findById(id));
+    public String view(@PathVariable int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
         return "/view";
     }
 }

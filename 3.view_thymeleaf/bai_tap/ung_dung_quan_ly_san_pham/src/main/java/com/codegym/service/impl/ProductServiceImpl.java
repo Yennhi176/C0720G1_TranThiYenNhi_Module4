@@ -2,12 +2,13 @@ package com.codegym.service.impl;
 
 import com.codegym.model.Product;
 import com.codegym.service.ProductService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
+@Service
 public class ProductServiceImpl implements ProductService {
 
     private static Map<Integer,Product> productMap;
