@@ -48,8 +48,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> findAllByDateOfWritingAndOrderByDateOfWriting(String date) {
-        return blogRepository.findAllByDateOfWritingAndOrderByDateOfWriting(date);
+    public Page<Blog> findAllByOrderByDateOfWriting(Pageable pageable) {
+        return blogRepository.findAllByOrderByDateOfWriting(pageable);
     }
 
 
