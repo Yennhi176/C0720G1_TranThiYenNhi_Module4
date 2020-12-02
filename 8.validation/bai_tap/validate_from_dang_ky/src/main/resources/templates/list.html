@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+</head>
+<body>
+<h3>User</h3>
+<p>
+    <a th:href="@{/create}">
+        Add new user
+    </a>
+</p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id = "blog" border="">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Age</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${listUser}">
+        <td th:text="${row.getFirstName()}"></td>
+        <td th:text="${row.getLastName()}"></td>
+        <td th:text="${row.getPhoneNumber()}"></td>
+        <td th:text="${row.getAge()}"></td>
+        <td th:text="${row.getEmail()}"></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
