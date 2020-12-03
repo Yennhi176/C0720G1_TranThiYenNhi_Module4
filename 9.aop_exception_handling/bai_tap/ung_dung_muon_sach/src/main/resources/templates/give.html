@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Give Back</title>
+</head>
+<body>
+<form action="/give" method="post" >
+    <input type="hidden" name="id" th:value="${id}">
+    <label>Input Book rent number :
+        <input type="text" name="bookNumber" id="bookNumber">
+    </label>
+    <input type="submit" value="Give Back">
+</form>
+</body>
+</html>
+
+
+
+
+
+

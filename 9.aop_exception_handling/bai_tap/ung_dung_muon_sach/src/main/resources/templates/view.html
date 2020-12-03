@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>View book</h3>
+<p>
+    <a th:href="@{/list}">
+        Back to book list
+    </a>
+</p>
+<div id="">
+    <div class="cusdetail">
+        <label>Name Book:</label>
+        <label th:text="${book.getNameBook()}"></label>
+    </div>
+    <div class="cusdetail">
+        <label>Amount:</label>
+        <label th:text="${book.getAmount()}"></label>
+    </div>
+    <a th:href="@{/borrowed(id=${id})}" >Borrowed Book</a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
