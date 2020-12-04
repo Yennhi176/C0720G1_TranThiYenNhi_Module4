@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+</head>
+<body>
+<h3>Cart</h3>
+<!--<div class="notify">-->
+<!--    <div th:if="${success}">-->
+<!--        <span th:text="${success}"></span>-->
+<!--    </div>-->
+<!--</div>-->
+<table id="blog" border="1">
+    <thead>
+    <tr>
+        <th>Total</th>
+        <th>Purchase</th>
+        <th>Put into cart</th>
+    </tr>
+    </thead>
+    <tbody>
+<!--    <tr th:each="row,rowStat : ${listCart}">-->
+<!--        <td th:text="${row.getQuantity()}"></td>-->
+<!--        <td th:text="${row.getTotal()}"></td>-->
+<!--        <td><a th:href="@{/view/{id}(id=${row.getId()})}">Purchase</a></td>-->
+<!--        <td><a th:href="@{/give/{id}(id=${row.getId()})}">Put into cart</a></td>-->
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

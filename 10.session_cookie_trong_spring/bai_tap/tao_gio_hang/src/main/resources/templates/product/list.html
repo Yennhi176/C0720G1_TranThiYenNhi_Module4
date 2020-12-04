@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+</head>
+<body>
+<h3>Product</h3>
+<p>
+    <a th:href="@{/create}">
+        Add New Product
+    </a>
+</p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id="blog" border="">
+    <thead>
+    <tr>
+        <th>Name product</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${listProduct}">
+        <td th:text="${row.getNameProduct()}"></td>
+        <td th:text="${row.getPrice()}"></td>
+        <td th:text="${row.getAmount()}"></td>
+        <td><a th:href="@{/view/{id}(id=${row.getId()})}">view</a></td>
+<!--        <td><a th:href="@{/give/{id}(id=${row.getId()})}">Give book back</a></td>-->
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

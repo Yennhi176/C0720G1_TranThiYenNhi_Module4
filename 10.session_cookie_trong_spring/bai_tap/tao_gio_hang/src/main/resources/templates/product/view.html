@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>View blog</h3>
+<p>
+    <a th:href="@{/list}">
+        Back to product list
+    </a>
+</p>
+<table id="blog" border="1">
+    <tr>
+        <th>Name Product</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>add to cart</th>
+    </tr>
+    <tr>
+        <td th:text="${product.getNameProduct()}"></td>
+        <td th:text="${product.getPrice()}"></td>
+        <td th:text="${product.getAmount()}"></td>
+        <a th:href="">add to cart</a>
+    </tr>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
