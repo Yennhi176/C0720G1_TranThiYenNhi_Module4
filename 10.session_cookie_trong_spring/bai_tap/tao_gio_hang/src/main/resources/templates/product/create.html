@@ -4,7 +4,7 @@
 <body>
 <h3>Add Book</h3>
 <p>
-    <a th:href="@{/list}">
+    <a th:href="@{product/list}">
         Back to book list
     </a>
 </p>
@@ -21,8 +21,8 @@
             <input type="text" th:field="*{price}"/>
         </div>
         <div>
-            <label>Amount</label>
-            <input type="text" th:field="*{amount}"/>
+            <label>Producer</label>
+            <input type="text" th:field="*{producer}"/>
         </div>
         <input type="submit" value="Save">
     </form>

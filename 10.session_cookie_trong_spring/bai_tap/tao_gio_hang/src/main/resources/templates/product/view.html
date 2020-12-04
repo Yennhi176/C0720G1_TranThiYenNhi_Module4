@@ -2,26 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout :: head"></head>
 <body>
-<h3>View blog</h3>
+<h3>View product</h3>
 <p>
-    <a th:href="@{/list}">
+    <a th:href="@{product/list}">
         Back to product list
     </a>
 </p>
 <table id="blog" border="1">
     <tr>
+        <th>Id</th>
         <th>Name Product</th>
         <th>Price</th>
-        <th>Amount</th>
-        <th>add to cart</th>
+        <th>Producer</th>
     </tr>
     <tr>
+        <td th:text="${product.getId()}"></td>
         <td th:text="${product.getNameProduct()}"></td>
         <td th:text="${product.getPrice()}"></td>
-        <td th:text="${product.getAmount()}"></td>
-        <a th:href="">add to cart</a>
+        <td th:text="${product.getProducer()}"></td>
     </tr>
 </table>
+<a th:href="@{/{id}/addProduct(id=${product.getId()})}"><h3>Add Product</h3></a>
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/layout :: head"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Product List</title>
 </head>
 <body>
-<h3>Cart</h3>
-<!--<div class="notify">-->
-<!--    <div th:if="${success}">-->
-<!--        <span th:text="${success}"></span>-->
-<!--    </div>-->
-<!--</div>-->
-<table id="blog" border="1">
-    <thead>
-    <tr>
-        <th>Total</th>
-        <th>Purchase</th>
-        <th>Put into cart</th>
-    </tr>
-    </thead>
-    <tbody>
-<!--    <tr th:each="row,rowStat : ${listCart}">-->
-<!--        <td th:text="${row.getQuantity()}"></td>-->
-<!--        <td th:text="${row.getTotal()}"></td>-->
-<!--        <td><a th:href="@{/view/{id}(id=${row.getId()})}">Purchase</a></td>-->
-<!--        <td><a th:href="@{/give/{id}(id=${row.getId()})}">Put into cart</a></td>-->
-    </tr>
-    </tbody>
-</table>
+<p>
+    <a th:href="@{product/list}">
+        Back to product list
+    </a>
+</p>
+<h3>Hàng đã mua</h3>
+<div id="detail">
+    <table id="products">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name Product</th>
+            <th>Price</th>
+            <th>Producer</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${listProduct}">
+            <td th:text="${row.id}"></td>
+            <td th:text="${row.nameProduct}"></td>
+            <td th:text="${row.price}"></td>
+            <td th:text="${row.producer}"></td>
+            <td><a th:href="@{/{id}/delete(id=${row.getId()})}">delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/deleteAll}"><h3>Delete All</h3></a>
+</div>
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

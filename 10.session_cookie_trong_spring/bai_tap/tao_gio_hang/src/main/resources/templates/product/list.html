@@ -20,20 +20,18 @@
     <tr>
         <th>Name product</th>
         <th>Price</th>
-        <th>Amount</th>
         <th>View</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="row,rowStat : ${listProduct}">
+    <tr th:each="row,rowStat : ${product}">
         <td th:text="${row.getNameProduct()}"></td>
         <td th:text="${row.getPrice()}"></td>
-        <td th:text="${row.getAmount()}"></td>
         <td><a th:href="@{/view/{id}(id=${row.getId()})}">view</a></td>
-<!--        <td><a th:href="@{/give/{id}(id=${row.getId()})}">Give book back</a></td>-->
     </tr>
     </tbody>
 </table>
+<a th:href="@{/list-cart}">Cart</a>
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
