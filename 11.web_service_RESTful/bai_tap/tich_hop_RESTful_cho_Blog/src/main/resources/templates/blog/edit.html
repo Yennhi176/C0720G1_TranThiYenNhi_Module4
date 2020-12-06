@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="blog/layout :: head"></head>
+<body>
+<h3>Modify blog</h3>
+<p>
+    <a th:href="@{/home-blog}">
+        Back to blog list
+    </a>
+</p>
+<div id="form">
+    <form action="#" th:action="@{/blog/update}" th:object="${blog}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Title</label>
+            <input type="text" th:field="*{title}"/>
+        </div>
+        <div>
+            <label>Content</label>
+            <input type="email" th:field="*{content}"/>
+        </div>
+        <div>
+            <label>Author</label>
+            <input type="text" th:field="*{author}"/>
+        </div>
+        <div>
+            <label>Date of writing</label>
+            <input type="text" th:field="*{dateOfWriting}"/>
+        </div>
+        <div>
+            <label>Category</label>
+            <td>
+                <select name="category">
+                    <option th:each="category : ${categoryList}"
+                            th:value="${category.id}"
+                            th:text="${category.nameCategory}"
+                            th:selected="(${category.id} == *{category.id})"></option>
+                </select>
+            </td>
+
+        </div>
+        <input type="submit" value="Modify"/>
+    </form>
+</div>
+<footer th:replace="blog/layout :: footer"></footer>
+</body>
+</html>
