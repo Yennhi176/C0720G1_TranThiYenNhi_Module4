@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>Input Id</th>
+        <th><input type="text" id="searchId"></th>
+        <th>
+            <button id="btnSearch">Search</button>
+        </th>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <td><input id="titleOut" readonly></td>
+    </tr>
+    <tr>
+        <th>Content</th>
+        <td><input id="contentOut" readonly></td>
+    </tr>
+    <tr>
+        <th>Author</th>
+        <td><input id="authorOut" readonly></td>
+    </tr>
+    <tr>
+        <th>Date Of Writing</th>
+        <td><input id="dateOfWritingOut" readonly></td>
+    </tr>
+</table>
+<br><br>
+
+
+<table border="1">
+    <tr>
+        <th>Title:</th>
+        <td><input id="titleBlog" type="text"></td>
+    </tr>
+    <tr>
+        <th>Content:</th>
+        <td><input id="contentBlog" type="text"></td>
+    </tr>
+    <tr>
+        <th>Author:</th>
+        <td><input id="authorBlog" type="text"></td>
+    </tr>
+    <tr>
+        <th>Date Of Writing:</th>
+        <td><input id="dateOfWritingBlog" type="text"></td>
+    </tr>
+    <th>
+        <button id="btnRegister">Register</button>
+    </th>
+</table>
+
+<script src="js/jquery-3.5.1.min.js"></script>
+<script>
+    $("#btnSearch").click(function () {
+        let idBlog = $("#searchId").val();
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8082/blog/" + idBlog,
+            dataType: "json",
+            success: function (blog) {
+                $("#titleOut").val(blog.title);
+                $("#contentOut").val(blog.content);
+                $("#authorOut").val(blog.author);
+                $("#dateOfWritingOut").val(blog.dateOfWriting);
+                console.log(blog);
+            },
+            error: function (result) {
+
+            }
+        });
+    });
+
+    $("#btnRegister").click(function () {
+        let titleB = $("#titleBlog").val();
+        let contentB = $("#contentBlog").val();
+        let authorB = $("#authorBlog").val();
+        let dateOfWriting = $("#dateOfWritingBlog").val();
+        let objBlog = {
+            "title": titleB,
+            "content": contentB,
+            "author": authorB,
+            "dateOfWriting": dateOfWriting
+
+        };
+
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8082/blog/",
+            data: JSON.stringify(objBlog),
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                console.log("Success");
+            },
+            error: function (result) {
+                console.log("Error");
+            }
+        });
+    });
+</script>
+</body>
+</html>
+
