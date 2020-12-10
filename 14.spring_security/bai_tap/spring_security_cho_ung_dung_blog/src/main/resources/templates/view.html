@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>View blog</h3>
+<p>
+    <a th:href="@{/}">
+        Back to blog list
+    </a>
+</p>
+<table id="blog" border="1">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Author</th>
+        <th>Date Of Writing</th>
+    </tr>
+    <tr>
+        <td th:text="${blog.getTitle()}"></td>
+        <td th:text="${blog.getContent()}"></td>
+        <td th:text="${blog.getAuthor()}"></td>
+        <td th:text="${blog.getDateOfWriting()}"></td>
+    </tr>
+</table>
+<!--<div id="">-->
+<!--    <div class="cusdetail">-->
+<!--        <label>Title:</label>-->
+<!--        <label th:text="${blog.getTitle()}"></label>-->
+<!--    </div>-->
+<!--    <div class="cusdetail">-->
+<!--        <label>Content:</label>-->
+<!--        <label th:text="${blog.getContent()}"></label>-->
+<!--    </div>-->
+<!--    <div class="cusdetail">-->
+<!--        <label>Author:</label>-->
+<!--        <label th:text="${blog.getAuthor()}"></label>-->
+<!--    </div>-->
+<!--    <div class="cusdetail">-->
+<!--        <label>Date of writing:</label>-->
+<!--        <label th:text="${blog.getDateOfWriting()}"></label>-->
+<!--    </div>-->
+<!--</div>-->
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
