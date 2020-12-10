@@ -4,6 +4,11 @@
 </head>
 <body>
 <h3>Blog</h3>
+<p>
+    <a th:href="@{/blog/create}">
+        Add new blog
+    </a>
+</p>
 <div class="notify">
     <div th:if="${success}">
         <span th:text="${success}"></span>
