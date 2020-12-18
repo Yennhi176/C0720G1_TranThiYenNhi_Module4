@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+<h3>Contract Detail</h3>
+<p>
+    <a th:href="@{/contract_detail/create}">
+        Add new Contract Detail
+    </a>
+</p>
+<p style="color: green" th:text="${messageSuccess}"></p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table class="table table-hover table-bordered display" >
+    <thead>
+    <tr>
+        <th>Quantity</th>
+        <th>Attach Service</th>
+        <th>Contract</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${listContractDetail}">
+        <td th:text="${row.getQuantity()}"></td>
+        <td th:text="${row.attachService.attachServiceName}"></td>
+        <td th:text="${row.contract.contractStartDate}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

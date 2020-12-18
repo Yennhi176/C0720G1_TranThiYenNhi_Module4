@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"
+>
+</head>
+<body>
+<h3>Employee</h3>
+<p>
+    <a th:href="@{/employee/create}">
+        <button class="btn btn-outline-success"> Add new Employee</button>
+    </a>
+</p>
+<form action="/employee/list">
+    <input type="text" style="width: 500px" name="keyword" placeholder="search name"/>
+    <input class="btn btn-outline-success" type="submit" value="Search">
+</form>
+<p style="color: green" th:text="${messageSuccess}"></p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+
+<!--<p sec:authorize="isAuthenticated()">Hello</p>-->
+<table class="table table-hover table-bordered display">
+    <thead>
+    <tr>
+        <th>Employee Name</th>
+        <th>Employee Birthday</th>
+        <th>Employee IdCard</th>
+        <th>Employee Salary</th>
+        <th>Employee Phone</th>
+        <th>Employee Email</th>
+        <th>Employee Address</th>
+        <th>Position</th>
+        <th>EducationDegree</th>
+        <th>Division</th>
+        <th>User</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${listEmployee}">
+        <td th:text="${row.getEmployeeName()}"></td>
+        <td th:text="${row.getEmployeeBirthday()}"></td>
+        <td th:text="${row.getEmployeeIdCard()}"></td>
+        <td th:text="${row.getEmployeeSalary()}"></td>
+        <td th:text="${row.getEmployeePhone()}"></td>
+        <td th:text="${row.getEmployeeEmail()}"></td>
+        <td th:text="${row.getEmployeeAddress()}"></td>
+        <td th:text="${row.position.positionName}"></td>
+        <td th:text="${row.educationDegree.educationDegreeName}"></td>
+        <td th:text="${row.division.divisionName}"></td>
+        <td th:text="${row.user.username}"></td>
+        <td><a th:href="@{/employee/{id}/edit(id=${row.getEmployeeId()})}" class="btn btn-outline-success">edit</a></td>
+        <!--        <td><a th:href="@{/employee/{id}/delete(id=${row.getEmployeeId()})}">delete</a></td>-->
+        <td>
+            <button class="btn btn-outline-danger" th:data-id="${row.employeeId}"
+                    onclick="getId(this.getAttribute('data-id'))" data-toggle="modal" data-target="#modelId">Delete
+            </button>
+        </td>
+        <td><a th:href="@{/employee/{id}/view(id=${row.getEmployeeId()})}" class="btn btn-outline-secondary">view</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/employee/delete">
+                    <input type="hidden" name="idDelete" id="idDelete">
+                    <h3>Are you delete this employee</h3>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a th:if="${listEmployee.hasPrevious()}"
+       th:href="@{list(page=${listEmployee.number -1}, keyword = ${keywordAfterCheck})}">Previous</a>
+    <span th:text="${listEmployee.number + 1}"></span>/<span th:text="${listEmployee.totalPages}"></span>
+    <a th:if="${listEmployee.hasNext()}"
+       th:href="@{list(page=${listEmployee.number + 1}, keyword = ${keywordAfterCheck})}">Next</a>
+</div>
+<script>
+    function getId(id) {
+        document.getElementById("idDelete").value=id;
+    }
+</script>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

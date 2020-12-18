@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+<h3>Contract</h3>
+<p>
+    <a th:href="@{/contract/create}">
+        Add new Contract
+    </a>
+</p>
+<p style="color: green" th:text="${messageSuccess}"></p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table class="table table-hover table-bordered display" >
+    <thead>
+    <tr>
+        <th>Contract Start Date</th>
+        <th>Contract End Date</th>
+        <th>Contract Deposit</th>
+        <th>Contract Total Money</th>
+        <th>Customer</th>
+        <th>Employee</th>
+        <th>Service</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${listContract}">
+        <td th:text="${row.getContractStartDate()}"></td>
+        <td th:text="${row.getContractEndDate()}"></td>
+        <td th:text="${row.getContractDeposit()}"></td>
+        <td th:text="${row.getContractTotalMoney()}"></td>
+        <td th:text="${row.customer.customerName}"></td>
+        <td th:text="${row.employee.employeeName}"></td>
+        <td th:text="${row.serviceEntity.serviceName}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

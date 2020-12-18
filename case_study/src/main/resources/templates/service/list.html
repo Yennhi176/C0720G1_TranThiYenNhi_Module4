@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+<h3>Service</h3>
+<p>
+    <a th:href="@{/service/create}">
+        Add new Service
+    </a>
+</p>
+<p style="color: green" th:text="${messageSuccess}"></p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table class="table table-hover table-bordered display" >
+    <thead>
+    <tr>
+        <th>Service Name</th>
+        <th>Service Area</th>
+        <th>Service Cost</th>
+        <th>Service MaxPeople</th>
+        <th>Standard Room</th>
+        <th>Description Other Convenience</th>
+        <th>Pool Area</th>
+        <th>Number Of Floors</th>
+        <th>RentType</th>
+        <th>ServiceType</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${listServiceEntity}">
+        <td th:text="${row.getServiceName()}"></td>
+        <td th:text="${row.getServiceArea()}"></td>
+        <td th:text="${row.getServiceCost()}"></td>
+        <td th:text="${row.getServiceMaxPeople()}"></td>
+        <td th:text="${row.getStandardRoom()}"></td>
+        <td th:text="${row.getDescriptionOtherConvenience()}"></td>
+        <td th:text="${row.getPoolArea()}"></td>
+        <td th:text="${row.getNumberOfFloors()}"></td>
+        <td th:text="${row.rentType.rentTypeName}"></td>
+        <td th:text="${row.serviceType.serviceTypeName}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

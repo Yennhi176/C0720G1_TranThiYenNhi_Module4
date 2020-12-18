@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+<h3>List Customer</h3>
+<p>
+    <a th:href="@{/customer/create}">
+        <button class="btn btn-outline-success"> Add new Customer</button>
+
+    </a>
+</p>
+<form action="/customer/list">
+    <input type="text" style="width: 500px" name="keyword" placeholder="search name or address" />
+    <input class="btn btn-outline-success" type="submit" value="Search">
+</form>
+<p style="color: green" th:text="${messageSuccess}"></p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table class="table table-hover table-bordered display" >
+    <thead>
+    <tr>
+        <th>Customer Name</th>
+        <th>Customer Birthday</th>
+        <th>Customer Gender</th>
+        <th>Customer IdCard</th>
+        <th>Customer Phone</th>
+        <th>Customer Email</th>
+        <th>Customer Address</th>
+        <th>CustomerType</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${listCustomer}">
+        <td th:text="${row.getCustomerName()}"></td>
+        <td th:text="${row.getCustomerBirthday()}"></td>
+        <td th:switch="${row.getCustomerGender()}">
+            <th:block th:case="1">Male</th:block>
+            <th:block th:case="0">Female</th:block>
+            <th:block th:case="*">Unknown</th:block>
+        </td>
+        <td th:text="${row.getCustomerIdCard()}"></td>
+        <td th:text="${row.getCustomerPhone()}"></td>
+        <td th:text="${row.getCustomerEmail()}"></td>
+        <td th:text="${row.getCustomerAddress()}"></td>
+        <td th:text="${row.customerType.customerTypeName}"></td>
+        <td><a th:href="@{/customer/{id}/edit(id=${row.getCustomerId()})}" class="btn btn-outline-success">edit</a></td>
+        <td>
+            <button class="btn btn-outline-danger" th:data-id="${row.customerId}"
+                    onclick="getId(this.getAttribute('data-id'))" data-toggle="modal" data-target="#modelId">Delete
+            </button>
+        </td>
+        <td><a th:href="@{/customer/{id}/view(id=${row.getCustomerId()})}" class="btn btn-outline-secondary">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<!-- Button trigger modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/customer/delete">
+                    <input type="hidden" name="idDelete" id="idDelete">
+                    <h3>Are you delete this customer</h3>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div>
+    <a th:if="${listCustomer.hasPrevious()}" th:href="@{list(page=${listCustomer.number -1}, keyword = ${keywordAfterCheck})}">Previous</a>
+    <span th:text="${listCustomer.number + 1}" ></span>/<span th:text="${listCustomer.totalPages}"></span>
+    <a th:if="${listCustomer.hasNext()}" th:href="@{list(page=${listCustomer.number + 1}, keyword = ${keywordAfterCheck})}">Next</a>
+</div>
+<script>
+    function getId(id) {
+     document.getElementById("idDelete").value=id;
+    }
+</script>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

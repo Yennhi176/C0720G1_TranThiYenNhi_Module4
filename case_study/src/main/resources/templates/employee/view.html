@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<h3>View blog</h3>
+<p>
+    <a th:href="@{/customer/list}">
+        Back to customer list
+    </a>
+</p>
+<table id="blog" border="1">
+    <tr>
+        <th>Employee Name</th>
+        <th>Employee Birthday</th>
+        <th>Employee IdCard</th>
+        <th>Employee Salary</th>
+        <th>Employee Phone</th>
+        <th>Employee Email</th>
+        <th>Employee Address</th>
+        <th>Position</th>
+        <th>EducationDegree</th>
+        <th>Division</th>
+        <th>User</th>
+    </tr>
+    <tr>
+        <td th:text="${employee.getEmployeeName()}"></td>
+        <td th:text="${employee.getEmployeeBirthday()}"></td>
+        <td th:text="${employee.getEmployeeIdCard()}"></td>
+        <td th:text="${employee.getEmployeeSalary()}"></td>
+        <td th:text="${employee.getEmployeePhone()}"></td>
+        <td th:text="${employee.getEmployeeEmail()}"></td>
+        <td th:text="${employee.getEmployeeAddress()}"></td>
+        <td th:text="${employee.getPosition().positionName}"></td>
+        <td th:text="${employee.getEducationDegree().educationDegreeName}"></td>
+        <td th:text="${employee.getDivision().divisionName}"></td>
+        <td th:text="${employee.getUser().username}"></td>
+    </tr>
+</table>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
